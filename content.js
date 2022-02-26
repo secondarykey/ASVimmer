@@ -1,18 +1,25 @@
 var timer = undefined;
 
-var elm = document.createElement('a');
+var child = document.createElement('a');
 
-elm.innerHTML = `
-TEST BUTTON
+child.innerHTML = `
+<svg class="photon-icon ng-scope" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="
+    width: 44px;
+    height: 22.5px;
+">
+<text x="0" y="0" font-size="11px" font-family="Arrial" text-anchor="middle">
+<tspan dx="8" dy="11">VIM</tspan>
+</text>
+</svg>
 `;
 
-elm.addEventListener("click",function() {
+child.addEventListener("click",function() {
   var port = chrome.extension.connect({name: "Background Message"});
   port.postMessage("Clicked");
 });
 
 function searchElement() {
-  let target = document.querySelector("div.f1upyuoq");
+  let target = document.querySelector("span.toolbar-left > div.toolbar-group");
   if ( target === null ) {
       return undefined;
   }
@@ -21,15 +28,15 @@ function searchElement() {
 
 function appendButton() {
 
-  var elm = searchElement();
-  if ( elm === undefined ) {
+  var parent = searchElement();
+  if ( parent === undefined ) {
     return;
   }
 
   if ( timer !== undefined ) {
     window.clearInterval(timer);
   }
-  buttons.appendChild(elm);
+  parent.appendChild(child);
 }
 
 timer = window.setInterval(appendButton, 1000);

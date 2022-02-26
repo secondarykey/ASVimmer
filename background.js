@@ -1,16 +1,3 @@
-
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: {hostEquals: 'aws.amazon.com'},
-      })
-      ],
-          actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
-  });
-});
-
 var stateMap = {};
 
 function setState(win) {
@@ -27,7 +14,7 @@ function getState(win) {
   return stateMap[win.id];
 }
 
-chrome.extension.onConnect.addListener(function(port) {
+chrome.runtime.onConnect.addListener(function(port) {
   port.onMessage.addListener(function(msg) {
     chrome.windows.getCurrent(function(win) {
       if (win.state != "fullscreen") {

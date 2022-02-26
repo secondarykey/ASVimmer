@@ -14,7 +14,7 @@ child.innerHTML = `
 `;
 
 child.addEventListener("click",function() {
-  var port = chrome.extension.connect({name: "Background Message"});
+  var port = chrome.runtime.connect({name: "Background Message"});
   port.postMessage("Clicked");
 });
 

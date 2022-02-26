@@ -1,0 +1,22 @@
+{
+    "name": "ASVimmer",
+    "version": "1.0",
+    "description": "A tool for using Vim with AppStream",
+    "permissions": ["activeTab","declarativeContent"],
+    "background": {
+      "scripts": ["background.js"],
+      "persistent": false
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["https://*.aws.amazon.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+
+    "icons": {
+      "48": "images/asvim.png"
+    },
+    "manifest_version": 2
+}
